@@ -1,0 +1,37 @@
+{
+  "name": "patience-chatbot",
+  "version": "1.0.0",
+  "description": "A chat bot testing framework for automated validation of conversational AI systems",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "patience": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "start": "node dist/cli.js"
+  },
+  "keywords": [
+    "chatbot",
+    "testing",
+    "automation",
+    "conversational-ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.0.0",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "fast-check": "^3.15.0",
+    "js-yaml": "^4.1.1",
+    "ws": "^8.16.0"
+  }
+}

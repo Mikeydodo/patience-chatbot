@@ -13,9 +13,13 @@ tsconfig.json
 .github/
 node_modules/
 
-# Documentation (keep only essential)
-RELEASE_CHECKLIST.md
-DOCUMENTATION.md
+# Internal documentation (not for npm package)
+RELEASE*.md
+*_READY.md
+BETA_RELEASE*.md
+QUICK_START.md
+EXAMPLES_REORGANIZATION.md
+CHAT_LOG_ANALYSIS_COMPLETE.md
 
 # Build artifacts
 *.tsbuildinfo

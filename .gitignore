@@ -28,3 +28,6 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Internal release preparation files (keep in repo but not in releases)
+# These are tracked in git for development but excluded from npm package

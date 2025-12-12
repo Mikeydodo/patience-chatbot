@@ -35,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0790749D2EECA8F200A1DF93 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		0790749E2EECA8FE00A1DF93 /* .gitignore 2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitignore 2"; sourceTree = "<group>"; };
 		07DF1E402EEBD7BB004972E2 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		07DF1E442EEC81B6004972E2 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		07DF1E452EEC81B6004972E2 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = SOURCE_ROOT; };
@@ -80,6 +82,8 @@
 			children = (
 				A0FFFFF8 /* Patience */,
 				A0FFFFF7 /* Products */,
+				0790749D2EECA8F200A1DF93 /* KeychainManager.swift */,
+				0790749E2EECA8FE00A1DF93 /* .gitignore 2 */,
 			);
 			sourceTree = "<group>";
 		};

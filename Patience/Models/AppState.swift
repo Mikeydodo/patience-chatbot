@@ -1,9 +1,11 @@
 import SwiftUI
 import Combine
+import Security
 
 @MainActor
 class AppState: ObservableObject {
     @Published var testConfigs: [TestConfig] = []
+    // API keys are stored in Keychain; this array never persists apiKey values.
     @Published var adversarialConfigs: [AdversarialTestConfig] = []
     @Published var analysisConfigs: [AnalysisConfig] = []
     @Published var testResults: [TestResults] = []
@@ -48,18 +50,29 @@ class AppState: ObservableObject {
     // MARK: - Adversarial Configuration Management
     
     func addAdversarialConfig(_ config: AdversarialTestConfig) {
-        adversarialConfigs.append(config)
+        var sanitized = config
+        if let key = sanitized.adversarialBot.apiKey {
+            _ = KeychainManager.shared.saveAPIKey(for: sanitized.id, key: key)
+            sanitized.adversarialBot.apiKey = nil
+        }
+        adversarialConfigs.append(sanitized)
         saveConfigs()
     }
     
     func updateAdversarialConfig(_ config: AdversarialTestConfig) {
         if let index = adversarialConfigs.firstIndex(where: { $0.id == config.id }) {
-            adversarialConfigs[index] = config
+            var sanitized = config
+            if let key = sanitized.adversarialBot.apiKey {
+                _ = KeychainManager.shared.saveAPIKey(for: sanitized.id, key: key)
+                sanitized.adversarialBot.apiKey = nil
+            }
+            adversarialConfigs[index] = sanitized
             saveConfigs()
         }
     }
     
     func deleteAdversarialConfig(_ config: AdversarialTestConfig) {
+        _ = KeychainManager.shared.deleteAPIKey(for: config.id)
         adversarialConfigs.removeAll { $0.id == config.id }
         saveConfigs()
     }
@@ -160,6 +173,7 @@ class AppState: ObservableObject {
         }
         
         if let encoded = try? JSONEncoder().encode(adversarialConfigs) {
+            // apiKey is nil for all adversarialConfigs here due to sanitization before save
             UserDefaults.standard.set(encoded, forKey: "adversarialConfigs")
         }
         
@@ -232,4 +246,3 @@ class AppState: ObservableObject {
         testConfigs.append(sampleConfig)
     }
 }
-

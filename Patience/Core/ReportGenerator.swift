@@ -57,12 +57,39 @@ class ReportGenerator {
     }
     
     private func formatAsJSON(_ report: TestReport) -> String {
+        // Create a sanitized copy of report with redacted sensitive data
+        let sanitizedScenarioResults = report.scenarioResults.map { scenario -> ScenarioResult in
+            let redactedMessages = scenario.conversationHistory.messages.map { message -> Message in
+                var redactedMessage = message
+                redactedMessage.content = redactSensitive(message.content)
+                return redactedMessage
+            }
+            let redactedValidationResults = scenario.validationResults.map { validation -> ValidationResult in
+                var redactedValidation = validation
+                redactedValidation.actual = redactSensitive(validation.actual)
+                return redactedValidation
+            }
+            var redactedScenario = scenario
+            redactedScenario.conversationHistory = ConversationHistory(messages: redactedMessages)
+            redactedScenario.validationResults = redactedValidationResults
+            return redactedScenario
+        }
+        
+        let sanitizedReport = TestReport(
+            timestamp: report.timestamp,
+            totalScenarios: report.totalScenarios,
+            passedScenarios: report.passedScenarios,
+            failedScenarios: report.failedScenarios,
+            scenarioResults: sanitizedScenarioResults,
+            summary: report.summary
+        )
+        
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         
         do {
-            let data = try encoder.encode(report)
+            let data = try encoder.encode(sanitizedReport)
             return String(data: data, encoding: .utf8) ?? "Error encoding JSON"
         } catch {
             return "Error generating JSON report: \(error.localizedDescription)"
@@ -145,7 +172,7 @@ class ReportGenerator {
                 
                 html += """
                 <div class="message \(messageClass)">
-                    <strong>\(senderLabel):</strong> \(escapeHTML(message.content))
+                    <strong>\(senderLabel):</strong> \(escapeHTML(redactSensitive(message.content)))
                     <small>(\(formatTime(message.timestamp)))</small>
                 </div>
                 """
@@ -160,7 +187,7 @@ class ReportGenerator {
                 <div class="validation \(validationClass)">
                     \(validationIcon) \(validation.message ?? "Validation result")
                     <br><small>Expected: \(validation.expected ?? "N/A")</small>
-                    <br><small>Actual: \(escapeHTML(validation.actual))</small>
+                    <br><small>Actual: \(escapeHTML(redactSensitive(validation.actual)))</small>
                 </div>
                 """
             }
@@ -222,7 +249,7 @@ class ReportGenerator {
             
             for message in result.conversationHistory.messages {
                 let senderLabel = message.sender == .patience ? "**User**" : "**Bot**"
-                markdown += "\(senderLabel): \(message.content)\n\n"
+                markdown += "\(senderLabel): \(redactSensitive(message.content))\n\n"
             }
             
             if !result.validationResults.isEmpty {
@@ -235,7 +262,7 @@ class ReportGenerator {
                     if let expected = validation.expected {
                         markdown += "  - Expected: `\(expected)`\n"
                     }
-                    markdown += "  - Actual: `\(validation.actual)`\n"
+                    markdown += "  - Actual: `\(redactSensitive(validation.actual))`\n"
                 }
                 
                 markdown += "\n"
@@ -287,5 +314,12 @@ class ReportGenerator {
             .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "\"", with: "&quot;")
             .replacingOccurrences(of: "'", with: "&#x27;")
+    }
+    
+    private func redactSensitive(_ text: String) -> String {
+        let pattern = "[A-Za-z0-9_\\-]{20,}"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return text }
+        let range = NSRange(text.startIndex..<text.endIndex, in: text)
+        return regex.stringByReplacingMatches(in: text, options: [], range: range, withTemplate: "***REDACTED***")
     }
 }

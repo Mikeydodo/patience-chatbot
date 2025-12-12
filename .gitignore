@@ -6,19 +6,32 @@
 *.xcworkspace/*
 !*.xcworkspace/contents.xcworkspacedata
 !*.xcworkspace/xcshareddata/
+*.xcuserdatad/
+*.xcuserdata/
+*.xcworkspace/xcuserdata/
 
 # Build output
 build/
 DerivedData/
 *.ipa
 *.app
+*.hmap
+*.dSYM.zip
+*.dSYM
 
 # Swift Package Manager
 .swiftpm/
 Packages/
 Package.resolved
 
-# Test reports
+# Patience Test Reports
+Reports/
+report-*.json
+report-*.html
+report-*.md
+test-result-*.json
+
+# Test output
 *.log
 TestResults/
 
@@ -28,16 +41,10 @@ TestResults/
 *.swp
 *.swo
 
-# OS
+# macOS
 .DS_Store
 Thumbs.db
 
 # Temporary files
 *.tmp
 *.temp
-
-# Swift specific
-*.hmap
-*.ipa
-*.dSYM.zip
-*.dSYM

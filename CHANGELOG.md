@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark mode support
 - Localization for multiple languages
 
-## [1.0.0] - 2025-01-15
+## [1.0.0] - 2025-12-12
 
 ### Added
 - **Native macOS Application** - Complete Swift/SwiftUI implementation

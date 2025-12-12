@@ -1,14 +1,26 @@
-# Dependencies
-node_modules/
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/*.xcscheme
+!*.xcodeproj/xcshareddata/
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/xcshareddata/
 
 # Build output
-dist/
-dist-gui/
-dist-electron/
+build/
+DerivedData/
+*.ipa
+*.app
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.resolved
 
 # Test reports
-reports/
 *.log
+TestResults/
 
 # IDE
 .vscode/
@@ -20,16 +32,12 @@ reports/
 .DS_Store
 Thumbs.db
 
-# Environment variables
-.env
-.env.local
-
-# Test coverage
-coverage/
-
 # Temporary files
 *.tmp
 *.temp
 
-# Internal release preparation files (keep in repo but not in releases)
-# These are tracked in git for development but excluded from npm package
+# Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM

@@ -4,19 +4,36 @@ inclusion: always
 
 # Technology Stack
 
-## Configuration
+## Primary Technologies
 
-- **IDE**: VSCode with Kiro AI assistant
+- **Language**: Swift 5.9+
+- **Framework**: SwiftUI for native macOS GUI
+- **Platform**: macOS 12.0+
+- **IDE**: Xcode (primary), VSCode with Kiro AI assistant (secondary)
 - **MCP**: Model Context Protocol enabled for extended AI capabilities
 
 ## Development Setup
 
-This workspace is currently minimal. As the project grows, update this document with:
-- Build tools and commands
-- Testing frameworks and commands
-- Deployment procedures
-- Environment setup requirements
+### Requirements
+- Xcode 14.0 or later
+- macOS 12.0 or later
+- Swift 5.9+
+
+### Build Commands
+```bash
+# Open in Xcode
+open Patience.xcodeproj
+
+# Build from command line
+xcodebuild -project Patience.xcodeproj -scheme Patience build
+
+# Run tests
+xcodebuild test -project Patience.xcodeproj -scheme Patience
+```
 
 ## Common Commands
 
-To be defined as the project develops.
+- **Build**: `⌘+B` in Xcode or `xcodebuild build`
+- **Run**: `⌘+R` in Xcode
+- **Test**: `⌘+U` in Xcode or `xcodebuild test`
+- **Clean**: `⌘+Shift+K` in Xcode or `xcodebuild clean`

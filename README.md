@@ -1,334 +1,353 @@
-# Patience - The Chat Bot Testing System
+# Patience
 
-Comprehensive testing framework for conversational AI with three powerful modes: live scenarios, log analysis, and AI-powered adversarial testing.
-
-⚠️ **Note:** This project is under active development with frequent updates. We're pushing towards a stable release for Christmas! 🎁
+A comprehensive native macOS application for chatbot testing with three powerful modes: live scenarios, log analysis, and AI-powered adversarial testing.
 
 ## Features
 
-- **Live Testing** - Scenario-based testing with HTTP/WebSocket support
-- **Log Analysis** - Retrospective testing of historical conversations
-- **Adversarial Testing** - AI-powered bot-to-bot testing with Ollama, OpenAI, and Anthropic
-- **Multi-format Reports** - JSON, HTML, Markdown, and CSV outputs
-- **Pattern Detection** - Identify failures and anomalies automatically
-- **Context Analysis** - Evaluate multi-turn conversation quality
+### 🚀 Live Testing
+- **Scenario-based Testing**: Create multi-step conversation flows with expected responses
+- **Protocol Support**: HTTP REST APIs with WebSocket support planned
+- **Validation Types**: Exact matching, regex patterns, semantic similarity, and custom validators
+- **Realistic Timing**: Configurable delays to simulate human typing patterns
+- **Real-time Monitoring**: Live progress tracking and immediate feedback
+- **Provider Support**: Generic HTTP endpoints, Ollama local models, and cloud APIs
+
+### 📊 Log Analysis
+- **Multi-format Import**: Drag-and-drop support for JSON, CSV, and text log files
+- **Automatic Detection**: Smart format detection and parsing
+- **Pattern Recognition**: Identify conversation patterns, failures, and success indicators
+- **Metrics Calculation**: Response rates, message statistics, and timing analysis
+- **Context Analysis**: Multi-turn conversation quality scoring
+- **Advanced Filtering**: Date ranges, message counts, and content-based filters
+
+### 🤖 Adversarial Testing
+- **AI-Powered Testing**: Let AI models test your chatbot through realistic conversations
+- **Multiple Providers**: 
+  - **Ollama** - Local models (llama2, mistral) - Free and private
+  - **OpenAI** - GPT-4, GPT-3.5 - Requires API key
+  - **Anthropic** - Claude 3 models - Requires API key
+- **Testing Strategies**:
+  - **Exploratory** - Broad questions to map capabilities
+  - **Adversarial** - Edge cases and challenging inputs
+  - **Focused** - Deep dive into specific features
+  - **Stress** - Rapid context switching and complex scenarios
+- **Safety Controls**: Cost monitoring, rate limiting, and content filtering
+
+### 📈 Comprehensive Reporting
+- **Multiple Formats**: Export as HTML, JSON, or Markdown
+- **Interactive Viewing**: Native macOS interface for browsing results
+- **Detailed Transcripts**: Complete conversation histories with timestamps
+- **Validation Analysis**: Pass/fail rates with detailed explanations
+- **Visual Summaries**: Charts and metrics for quick insights
+
+## Requirements
+
+- **macOS 13.0** or later
+- **Xcode 15.0** or later (for development)
+- **Swift 5.9** or later (for development)
 
 ## Installation
 
-```bash
-npm install
-npm run build
-```
+### Option 1: Download Release (Recommended)
+1. Download the latest release from the releases page
+2. Drag `Patience.app` to your Applications folder
+3. Launch Patience from Applications or Spotlight
+
+### Option 2: Build from Source
+1. Clone this repository
+2. Open `Patience.xcodeproj` in Xcode
+3. Build and run (⌘+R)
 
 ## Quick Start
 
-```bash
-# Install
-npm install && npm run build
+### 1. Live Testing
+1. Click **"New Configuration"** in the Testing tab
+2. Enter your bot's endpoint URL
+3. Add conversation scenarios with expected responses
+4. Click **"Run Tests"** to execute
 
-# Live testing
-patience examples/live-testing/config.json
+### 2. Log Analysis
+1. Switch to the **Analysis** tab
+2. Drag a log file onto the interface or click **"Import Log File"**
+3. Configure analysis options (metrics, patterns, context)
+4. View results in the interactive interface
 
-# Analyze logs
-patience analyze examples/log-analysis/sample-logs/conversations.json
-
-# Adversarial testing (local, free)
-patience adversarial --config examples/adversarial-testing/simple-config.json
-```
-
-See [examples/](examples/) for all configuration files and detailed guides.
-
-## CLI Commands
-
-### Live Testing
-
-```bash
-# Run with configuration file
-patience examples/live-testing/config.json
-
-# Specify output directory
-patience config.json -o ./my-reports
-
-# Choose report format
-patience config.json -f html
-
-# Show help
-patience --help
-```
-
-**Options:**
-- `-c, --config <file>` - Configuration file path
-- `-o, --output <path>` - Output directory (default: ./reports)
-- `-f, --format <format>` - Report format: json, html, markdown
-
-See [examples/live-testing/](examples/live-testing/) for configuration examples.
-
-### Log Analysis
-
-```bash
-# Analyze a log file
-patience analyze examples/log-analysis/sample-logs/conversations.json
-
-# Use configuration file
-patience analyze -c examples/log-analysis/config.json
-
-# Specify format and output
-patience analyze logs.csv -f csv -o ./analysis -r markdown
-```
-
-**Options:**
-- `-l, --log <file>` - Log file to analyze
-- `-c, --config <file>` - Configuration file
-- `-f, --format <format>` - Log format: json, csv, text, auto
-- `-o, --output <path>` - Output directory (default: ./analysis-reports)
-- `-r, --report-format <fmt>` - Report format: json, html, markdown, csv
-
-See [examples/log-analysis/](examples/log-analysis/) for configuration examples.
-
-### Adversarial Testing
-
-```bash
-# Quick start with Ollama
-patience adversarial --target http://localhost:3000/chat --adversary ollama
-
-# Use configuration file
-patience adversarial --config examples/adversarial-testing/simple-config.json
-
-# Specify parameters
-patience adversarial \
-  --target http://localhost:3000/chat \
-  --adversary ollama \
-  --model llama2 \
-  --strategy exploratory \
-  --turns 15 \
-  --conversations 5
-```
-
-**Options:**
-- `-c, --config <file>` - Configuration file
-- `-t, --target <url>` - Target bot endpoint
-- `-a, --adversary <provider>` - Provider: ollama, openai, anthropic
-- `-m, --model <model>` - Model name (e.g., llama2, gpt-4)
-- `-s, --strategy <strategy>` - Strategy: exploratory, adversarial, focused, stress
-- `--turns <number>` - Max turns per conversation
-- `--conversations <number>` - Number of conversations
-- `-o, --output <path>` - Output directory
-
-See [examples/adversarial-testing/](examples/adversarial-testing/) for configuration examples.
+### 3. Adversarial Testing
+1. Go to the **Adversarial** tab
+2. Click **"New Configuration"**
+3. Set up your target bot and choose an AI provider
+4. Select a testing strategy and parameters
+5. Click **"Start Adversarial Testing"**
 
 ## Configuration
 
-### Live Testing
-
-Configure scenarios, validation rules, timing, and reporting:
+### Live Testing Configuration
 
 ```json
 {
   "targetBot": {
-    "name": "My Bot",
+    "name": "My Chatbot",
     "protocol": "http",
-    "endpoint": "http://localhost:3000/chat"
+    "endpoint": "https://api.example.com/chat",
+    "provider": "generic"
   },
   "scenarios": [
     {
-      "id": "greeting",
+      "id": "greeting-test",
       "name": "Greeting Test",
       "steps": [
         {
           "message": "Hello!",
           "expectedResponse": {
             "validationType": "pattern",
-            "expected": "hi|hello|hey"
+            "expected": "hello|hi|hey|greetings",
+            "threshold": 0.8
           }
+        }
+      ],
+      "expectedOutcomes": [
+        {
+          "type": "pattern",
+          "expected": "friendly.*response",
+          "description": "Bot should respond in a friendly manner"
         }
       ]
     }
   ],
   "validation": {
-    "defaultType": "pattern"
+    "defaultType": "pattern",
+    "semanticSimilarityThreshold": 0.8
   },
   "timing": {
-    "rapidFire": true,
+    "enableDelays": true,
+    "baseDelay": 1000,
+    "delayPerCharacter": 50,
+    "rapidFire": false,
     "responseTimeout": 30000
   },
   "reporting": {
-    "outputPath": "./reports",
-    "formats": ["html", "json"]
+    "outputPath": "~/Documents/Patience Reports",
+    "formats": ["html", "json"],
+    "includeConversationHistory": true,
+    "verboseErrors": true
   }
 }
 ```
 
-**Validation types:** exact, pattern, semantic, custom  
-**Protocols:** HTTP, WebSocket  
-**Report formats:** JSON, HTML, Markdown
-
-See [examples/live-testing/](examples/live-testing/) for complete examples.
-
-### Log Analysis
-
-Configure log source, filters, analysis options, and reporting:
-
-```json
-{
-  "logSource": {
-    "path": "conversations.json",
-    "format": "auto"
-  },
-  "filters": {
-    "minMessages": 3,
-    "dateRange": {
-      "start": "2025-01-01T00:00:00Z",
-      "end": "2025-12-31T23:59:59Z"
-    }
-  },
-  "analysis": {
-    "calculateMetrics": true,
-    "detectPatterns": true,
-    "checkContextRetention": true
-  },
-  "reporting": {
-    "outputPath": "./analysis-reports",
-    "formats": ["html", "json", "csv"]
-  }
-}
-```
-
-**Log formats:** JSON, CSV, text (auto-detected)  
-**Report formats:** JSON, HTML, Markdown, CSV
-
-See [examples/log-analysis/](examples/log-analysis/) for complete examples.
-
-### Adversarial Testing
-
-Configure target bot, adversarial bot, strategy, and execution:
+### Adversarial Testing Configuration
 
 ```json
 {
   "targetBot": {
-    "name": "My Bot",
+    "name": "My Chatbot",
     "protocol": "http",
-    "endpoint": "http://localhost:3000/chat"
+    "endpoint": "https://api.example.com/chat"
   },
   "adversarialBot": {
     "provider": "ollama",
-    "model": "llama2"
+    "model": "llama2",
+    "endpoint": "http://localhost:11434"
   },
   "conversation": {
     "strategy": "exploratory",
-    "maxTurns": 10
+    "maxTurns": 10,
+    "goals": [
+      "Test greeting capabilities",
+      "Verify error handling",
+      "Check knowledge boundaries"
+    ]
   },
   "execution": {
-    "numConversations": 5
+    "numConversations": 5,
+    "delayBetweenTurns": 2000
   },
   "reporting": {
-    "outputPath": "./adversarial-reports",
-    "formats": ["json", "text"]
+    "outputPath": "~/Documents/Patience Reports",
+    "formats": ["html", "json"],
+    "includeTranscripts": true,
+    "realTimeMonitoring": true
   }
 }
 ```
 
-**Providers:** Ollama (local/free), OpenAI, Anthropic  
-**Strategies:** exploratory, adversarial, focused, stress  
-**Report formats:** JSON, text, CSV
+## Supported Log Formats
 
-See [examples/adversarial-testing/](examples/adversarial-testing/) for complete examples.
-
-## Log Analysis
-
-Analyze historical conversations to validate bot performance retrospectively.
-
-**Features:**
-- Multi-format support (JSON, CSV, text)
-- Metrics calculation (response rates, message stats, timing)
-- Pattern detection (failures, successes, anomalies)
-- Context analysis (multi-turn quality scoring)
-- Advanced filtering (date range, message count, content)
-
-**Example:**
-```bash
-patience analyze examples/log-analysis/sample-logs/conversations.json
+### JSON Format
+```json
+[
+  {
+    "sessionId": "session-123",
+    "messages": [
+      {
+        "sender": "user",
+        "content": "Hello",
+        "timestamp": "2025-01-15T10:30:00Z"
+      },
+      {
+        "sender": "bot",
+        "content": "Hi there! How can I help you?",
+        "timestamp": "2025-01-15T10:30:01Z"
+      }
+    ],
+    "startTime": "2025-01-15T10:30:00Z",
+    "endTime": "2025-01-15T10:35:00Z"
+  }
+]
 ```
 
-See [examples/log-analysis/](examples/log-analysis/) for detailed guide and examples.
+### CSV Format
+```csv
+timestamp,sender,content
+2025-01-15T10:30:00Z,user,Hello
+2025-01-15T10:30:01Z,bot,Hi there! How can I help you?
+```
 
-## Programmatic Usage
-
-```typescript
-import { TestExecutor, AnalysisEngine, AdversarialTestOrchestrator } from 'patience-chatbot';
-
-// Live testing
-const executor = new TestExecutor();
-const results = await executor.executeTests(config);
-
-// Log analysis
-const engine = new AnalysisEngine();
-const analysis = await engine.analyze(config);
-
-// Adversarial testing
-const orchestrator = new AdversarialTestOrchestrator(config);
-const adversarial = await orchestrator.run();
+### Text Format
+```
+User: Hello
+Bot: Hi there! How can I help you?
+User: What's the weather like?
+Bot: I don't have access to weather information.
 ```
 
 ## Architecture
 
-Modular design with three main systems:
+Patience is built with a clean, modular architecture:
 
-1. **Live Testing** - Configuration → Execution → Communication → Validation → Reporting
-2. **Log Analysis** - Loading → Parsing → Filtering → Analysis → Reporting
-3. **Adversarial** - LLM Connectors → Strategy → Conversation Manager → Validation → Logging
+### Core Components
+- **TestExecutor**: Manages live test execution and scenario processing
+- **AnalysisEngine**: Handles log parsing, filtering, and analysis
+- **AdversarialTestOrchestrator**: Coordinates AI-powered testing sessions
+- **ReportGenerator**: Creates formatted reports in multiple formats
 
-## Documentation
+### Communication Layer
+- **CommunicationManager**: Handles HTTP/WebSocket protocols
+- **ResponseValidator**: Validates bot responses against criteria
+- **AI Connectors**: Interfaces with OpenAI, Anthropic, and Ollama
 
-- **[README.md](README.md)** - This file (overview and quick start)
-- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Complete documentation guide
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history
-- **[examples/adversarial-testing/README.md](examples/adversarial-testing/README.md)** - Detailed adversarial guide
-- **[examples/](examples/)** - Configuration examples and sample data
+### User Interface
+- **SwiftUI Views**: Native macOS interface components
+- **AppState**: Centralized state management with Combine
+- **Configuration Editors**: Visual editors for all configuration types
 
 ## Development
 
-```bash
-# Install dependencies
-npm install
+### Project Structure
+```
+Patience/
+├── PatienceApp.swift          # App entry point
+├── ContentView.swift          # Main interface
+├── Models/
+│   ├── Types.swift           # Core data models
+│   └── AppState.swift        # State management
+├── Core/
+│   ├── TestExecutor.swift    # Test execution
+│   ├── AnalysisEngine.swift  # Log analysis
+│   ├── AdversarialTestOrchestrator.swift
+│   └── ReportGenerator.swift
+├── Views/
+│   ├── TestingView.swift     # Live testing UI
+│   ├── AnalysisView.swift    # Analysis UI
+│   ├── AdversarialView.swift # Adversarial UI
+│   └── ReportsView.swift     # Reports UI
+└── Assets.xcassets/          # App icons and assets
+```
 
-# Build
-npm run build
+### Building
+```bash
+# Open in Xcode
+open Patience.xcodeproj
+
+# Build from command line
+xcodebuild -project Patience.xcodeproj -scheme Patience build
 
 # Run tests
-npm test
+xcodebuild test -project Patience.xcodeproj -scheme Patience
 ```
 
-## Adversarial Testing
+### Contributing
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and add tests
+4. Commit: `git commit -m 'Add amazing feature'`
+5. Push: `git push origin feature/amazing-feature`
+6. Open a Pull Request
 
-AI-powered bot-to-bot testing where an LLM tests your chatbot through realistic conversations.
+## API Providers Setup
 
-**Providers:**
-- Ollama - Local models (llama2, mistral) - Free
-- OpenAI - GPT-4, GPT-3.5 - Requires API key
-- Anthropic - Claude 3 models - Requires API key
+### Ollama (Local, Free)
+1. Install Ollama from [ollama.ai](https://ollama.ai)
+2. Pull a model: `ollama pull llama2`
+3. Start Ollama: `ollama serve`
+4. Use endpoint: `http://localhost:11434`
 
-**Strategies:**
-- Exploratory - Broad questions to map capabilities
-- Adversarial - Edge cases and challenging inputs
-- Focused - Deep dive into specific features
-- Stress - Rapid context switching and complex scenarios
+### OpenAI
+1. Get API key from [OpenAI Platform](https://platform.openai.com)
+2. Add to adversarial configuration
+3. Choose model: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`
 
-**Example:**
-```bash
-patience adversarial --config examples/adversarial-testing/simple-config.json
-```
+### Anthropic
+1. Get API key from [Anthropic Console](https://console.anthropic.com)
+2. Add to adversarial configuration  
+3. Choose model: `claude-3-opus`, `claude-3-sonnet`, `claude-3-haiku`
 
-See [examples/adversarial-testing/](examples/adversarial-testing/) for detailed guide and examples.
+## Security & Privacy
 
-## Contributing
+- **App Sandboxing**: Patience runs in a secure sandbox environment
+- **Network Access**: Only connects to endpoints you configure
+- **File Access**: Only reads/writes files you explicitly select
+- **API Keys**: Stored securely in macOS Keychain
+- **Local Processing**: Log analysis happens entirely on your Mac
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
+## Troubleshooting
 
-```bash
-npm install && npm run build && npm test
-```
+### Common Issues
+
+**"Connection failed" errors:**
+- Verify the bot endpoint URL is correct and accessible
+- Check if the bot requires authentication headers
+- Ensure the bot is running and responding to requests
+
+**"Invalid log format" errors:**
+- Verify the log file format matches the selected type
+- Check that JSON files are valid JSON
+- Ensure CSV files have proper headers
+
+**Adversarial testing not starting:**
+- Verify API keys are correctly configured
+- Check that Ollama is running (for local models)
+- Ensure sufficient API credits (for paid providers)
+
+### Getting Help
+
+1. Check the built-in help documentation
+2. Review configuration examples
+3. Open an issue on GitHub with:
+   - macOS version
+   - Patience version
+   - Steps to reproduce
+   - Error messages or logs
 
 ## License
 
-MIT License - See [LICENSE](LICENSE) for details.
+MIT License
+
+Copyright (c) 2025 Patience Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

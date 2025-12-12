@@ -1,0 +1,291 @@
+import Foundation
+
+class ReportGenerator {
+    func generateReport(from results: TestResults) -> TestReport {
+        let summary = generateSummary(from: results)
+        
+        return TestReport(
+            timestamp: Date(),
+            totalScenarios: results.summary.total,
+            passedScenarios: results.summary.passed,
+            failedScenarios: results.summary.failed,
+            scenarioResults: results.scenarioResults,
+            summary: summary
+        )
+    }
+    
+    func formatReport(_ report: TestReport, format: ReportFormat) -> String {
+        switch format {
+        case .json:
+            return formatAsJSON(report)
+        case .html:
+            return formatAsHTML(report)
+        case .markdown:
+            return formatAsMarkdown(report)
+        }
+    }
+    
+    private func generateSummary(from results: TestResults) -> String {
+        let passRate = results.summary.passRate * 100
+        let duration = results.endTime?.timeIntervalSince(results.startTime) ?? 0
+        
+        var summary = """
+        Test Execution Summary
+        =====================
+        
+        Test Run ID: \(results.testRunId)
+        Start Time: \(formatDate(results.startTime))
+        End Time: \(formatDate(results.endTime ?? Date()))
+        Duration: \(formatDuration(duration))
+        
+        Results:
+        - Total Scenarios: \(results.summary.total)
+        - Passed: \(results.summary.passed)
+        - Failed: \(results.summary.failed)
+        - Pass Rate: \(String(format: "%.1f", passRate))%
+        
+        """
+        
+        if results.summary.failed > 0 {
+            summary += "\nFailed Scenarios:\n"
+            for result in results.scenarioResults where !result.passed {
+                summary += "- \(result.scenarioName): \(result.error ?? "Validation failed")\n"
+            }
+        }
+        
+        return summary
+    }
+    
+    private func formatAsJSON(_ report: TestReport) -> String {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        
+        do {
+            let data = try encoder.encode(report)
+            return String(data: data, encoding: .utf8) ?? "Error encoding JSON"
+        } catch {
+            return "Error generating JSON report: \(error.localizedDescription)"
+        }
+    }
+    
+    private func formatAsHTML(_ report: TestReport) -> String {
+        let passRate = Double(report.passedScenarios) / Double(report.totalScenarios) * 100
+        let statusColor = passRate >= 80 ? "green" : passRate >= 60 ? "orange" : "red"
+        
+        var html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Patience Test Report</title>
+            <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 40px; }
+                .header { background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+                .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+                .metric { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                .metric-value { font-size: 24px; font-weight: bold; color: \(statusColor); }
+                .scenario { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+                .scenario-header { background: #f8f9fa; padding: 15px; border-bottom: 1px solid #ddd; }
+                .scenario-content { padding: 15px; }
+                .passed { border-left: 4px solid green; }
+                .failed { border-left: 4px solid red; }
+                .message { background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 4px; }
+                .user-message { background: #e3f2fd; }
+                .bot-message { background: #f3e5f5; }
+                .validation { margin-top: 10px; padding: 10px; border-radius: 4px; }
+                .validation.passed { background: #d4edda; color: #155724; }
+                .validation.failed { background: #f8d7da; color: #721c24; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Patience Test Report</h1>
+                <p>Generated on \(formatDate(report.timestamp))</p>
+            </div>
+            
+            <div class="summary">
+                <div class="metric">
+                    <div class="metric-label">Total Scenarios</div>
+                    <div class="metric-value">\(report.totalScenarios)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Passed</div>
+                    <div class="metric-value" style="color: green;">\(report.passedScenarios)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Failed</div>
+                    <div class="metric-value" style="color: red;">\(report.failedScenarios)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Pass Rate</div>
+                    <div class="metric-value">\(String(format: "%.1f", passRate))%</div>
+                </div>
+            </div>
+            
+            <h2>Scenario Results</h2>
+        """
+        
+        for result in report.scenarioResults {
+            let statusClass = result.passed ? "passed" : "failed"
+            let statusIcon = result.passed ? "✅" : "❌"
+            
+            html += """
+            <div class="scenario \(statusClass)">
+                <div class="scenario-header">
+                    <h3>\(statusIcon) \(result.scenarioName)</h3>
+                    <p>Duration: \(formatDuration(result.duration))</p>
+                </div>
+                <div class="scenario-content">
+            """
+            
+            // Add conversation messages
+            for message in result.conversationHistory.messages {
+                let messageClass = message.sender == .patience ? "user-message" : "bot-message"
+                let senderLabel = message.sender == .patience ? "User" : "Bot"
+                
+                html += """
+                <div class="message \(messageClass)">
+                    <strong>\(senderLabel):</strong> \(escapeHTML(message.content))
+                    <small>(\(formatTime(message.timestamp)))</small>
+                </div>
+                """
+            }
+            
+            // Add validation results
+            for validation in result.validationResults {
+                let validationClass = validation.passed ? "passed" : "failed"
+                let validationIcon = validation.passed ? "✅" : "❌"
+                
+                html += """
+                <div class="validation \(validationClass)">
+                    \(validationIcon) \(validation.message ?? "Validation result")
+                    <br><small>Expected: \(validation.expected ?? "N/A")</small>
+                    <br><small>Actual: \(escapeHTML(validation.actual))</small>
+                </div>
+                """
+            }
+            
+            if let error = result.error {
+                html += """
+                <div class="validation failed">
+                    ❌ Error: \(escapeHTML(error))
+                </div>
+                """
+            }
+            
+            html += """
+                </div>
+            </div>
+            """
+        }
+        
+        html += """
+        </body>
+        </html>
+        """
+        
+        return html
+    }
+    
+    private func formatAsMarkdown(_ report: TestReport) -> String {
+        let passRate = Double(report.passedScenarios) / Double(report.totalScenarios) * 100
+        
+        var markdown = """
+        # Patience Test Report
+        
+        **Generated:** \(formatDate(report.timestamp))
+        
+        ## Summary
+        
+        | Metric | Value |
+        |--------|-------|
+        | Total Scenarios | \(report.totalScenarios) |
+        | Passed | \(report.passedScenarios) |
+        | Failed | \(report.failedScenarios) |
+        | Pass Rate | \(String(format: "%.1f", passRate))% |
+        
+        ## Scenario Results
+        
+        """
+        
+        for result in report.scenarioResults {
+            let statusIcon = result.passed ? "✅" : "❌"
+            
+            markdown += """
+            ### \(statusIcon) \(result.scenarioName)
+            
+            **Duration:** \(formatDuration(result.duration))
+            
+            #### Conversation
+            
+            """
+            
+            for message in result.conversationHistory.messages {
+                let senderLabel = message.sender == .patience ? "**User**" : "**Bot**"
+                markdown += "\(senderLabel): \(message.content)\n\n"
+            }
+            
+            if !result.validationResults.isEmpty {
+                markdown += "#### Validation Results\n\n"
+                
+                for validation in result.validationResults {
+                    let validationIcon = validation.passed ? "✅" : "❌"
+                    markdown += "- \(validationIcon) \(validation.message ?? "Validation result")\n"
+                    
+                    if let expected = validation.expected {
+                        markdown += "  - Expected: `\(expected)`\n"
+                    }
+                    markdown += "  - Actual: `\(validation.actual)`\n"
+                }
+                
+                markdown += "\n"
+            }
+            
+            if let error = result.error {
+                markdown += "#### Error\n\n```\n\(error)\n```\n\n"
+            }
+            
+            markdown += "---\n\n"
+        }
+        
+        return markdown
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        return formatter.string(from: date)
+    }
+    
+    private func formatTime(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        return formatter.string(from: date)
+    }
+    
+    private func formatDuration(_ duration: Double) -> String {
+        if duration < 60 {
+            return String(format: "%.1fs", duration)
+        } else if duration < 3600 {
+            let minutes = Int(duration / 60)
+            let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
+            return "\(minutes)m \(seconds)s"
+        } else {
+            let hours = Int(duration / 3600)
+            let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
+            return "\(hours)h \(minutes)m"
+        }
+    }
+    
+    private func escapeHTML(_ string: String) -> String {
+        return string
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+            .replacingOccurrences(of: "\"", with: "&quot;")
+            .replacingOccurrences(of: "'", with: "&#x27;")
+    }
+}

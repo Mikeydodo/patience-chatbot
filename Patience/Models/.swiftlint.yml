@@ -1,0 +1,80 @@
+# SwiftLint Configuration for Patience
+# Focused on catching unused code and common issues while avoiding noisy rules.
+
+# Directories to lint
+included:
+  - .
+
+# Directories to exclude from linting
+excluded:
+  - Carthage
+  - Pods
+  - .build
+  - DerivedData
+  - Generated
+  - ThirdParty
+
+# Rules explicitly disabled (keep noise low to start)
+disabled_rules:
+  - todo
+  - colon
+  - comma
+  - control_statement
+
+# Analyzer rules (require SwiftSyntax; great for dead code detection)
+analyzer_rules:
+  - unused_import
+  - unused_declaration
+
+# Opt-in rules that are generally helpful without being too noisy
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - let_var_whitespace
+  - operator_usage_whitespace
+  - redundant_nil_coalescing
+  - redundant_optional_initialization
+  - redundant_string_enum_value
+  - switch_case_on_newline
+  - trailing_newline
+  - trailing_semicolon
+
+# Length and complexity thresholds
+line_length:
+  warning: 120
+  error: 160
+  ignores_comments: true
+  ignores_urls: true
+
+type_body_length:
+  warning: 300
+  error: 400
+
+file_length:
+  warning: 800
+  error: 1200
+  ignore_comment_only_lines: true
+
+function_body_length:
+  warning: 80
+  error: 120
+  ignores_comments: true
+
+# Naming rules
+identifier_name:
+  min_length: 2
+  max_length: 40
+  excluded: [id, x, y, i, j, url, api, ok]
+
+type_name:
+  min_length: 3
+  max_length: 60
+  excluded: [ID, URL, API, JSON]
+
+# Whitespace rules
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: true
+
+# Reporter format for Xcode
+reporter: xcode

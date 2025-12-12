@@ -8,24 +8,41 @@ inclusion: always
 
 ```
 .
-├── .kiro/              # Kiro AI assistant configuration
-│   └── steering/       # AI guidance documents
-└── .vscode/            # VSCode workspace settings
+├── .kiro/                      # Kiro AI assistant configuration
+│   └── steering/               # AI guidance documents
+├── .vscode/                    # VSCode workspace settings
+├── Patience/                   # Swift source code
+│   ├── Assets.xcassets/        # App icons and images
+│   ├── Core/                   # Business logic and algorithms
+│   ├── Models/                 # Data models and structures
+│   ├── Views/                  # SwiftUI view components
+│   ├── Preview Content/        # SwiftUI preview assets
+│   ├── ContentView.swift       # Main app view
+│   ├── PatienceApp.swift       # App entry point
+│   └── Patience.entitlements   # App permissions
+├── Patience.xcodeproj/         # Xcode project configuration
+└── Documentation files         # README, CHANGELOG, etc.
 ```
 
 ## Conventions
 
 ### File Organization
 
-As the project grows, maintain clear separation of concerns:
+- **Models/**: Data structures, enums, and business entities
+- **Core/**: Business logic, algorithms, and utilities
+- **Views/**: SwiftUI views organized by feature
+- **Assets.xcassets/**: Images, colors, and other visual assets
 - Keep configuration files at the root level
 - Group related functionality into dedicated directories
-- Use descriptive folder and file names
 
 ### Naming Conventions
 
-To be established based on the primary language/framework adopted.
+- **Swift Files**: PascalCase (e.g., `ContentView.swift`, `GameEngine.swift`)
+- **Directories**: PascalCase for Swift modules, lowercase for general folders
+- **Assets**: Descriptive names in Assets.xcassets
+- **Views**: Suffix with "View" (e.g., `GameView`, `SettingsView`)
+- **Models**: Descriptive nouns (e.g., `Card`, `GameState`)
 
 ## Notes
 
-This is a minimal workspace structure. Update this document as the project architecture evolves.
+This is a native macOS SwiftUI application structure following Apple's recommended patterns.

